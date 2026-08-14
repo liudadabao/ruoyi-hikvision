@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.dromara</groupId>
+        <artifactId>ruoyi-modules</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ruoyi-hikvision</artifactId>
+    <packaging>pom</packaging>
+    <description>海康威视 SDK 插拔式模块（按需引入子模块即可启用对应能力）</description>
+
+    <modules>
+        <module>ruoyi-hikvision-core</module>
+        <module>ruoyi-hikvision-media</module>
+        <module>ruoyi-hikvision-preview</module>
+        <module>ruoyi-hikvision-playback</module>
+        <module>ruoyi-hikvision-ptz</module>
+        <module>ruoyi-hikvision-alarm</module>
+        <module>ruoyi-hikvision-audio</module>
+        <module>ruoyi-hikvision-config</module>
+        <module>ruoyi-hikvision-access</module>
+        <module>ruoyi-hikvision-face</module>
+        <module>ruoyi-hikvision-intercom</module>
+        <module>ruoyi-hikvision-vehicle</module>
+        <module>ruoyi-hikvision-elevator</module>
+        <module>ruoyi-hikvision-display</module>
+        <module>ruoyi-hikvision-starter</module>
+    </modules>
+
+</project>

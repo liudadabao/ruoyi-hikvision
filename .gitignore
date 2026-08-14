@@ -1,0 +1,27 @@
+# 海康 SDK 原生库（海康威视版权所有，不随仓库分发）
+backend/ruoyi-modules/ruoyi-hikvision/ruoyi-hikvision-core/src/main/resources/sdk/version/*/
+!backend/ruoyi-modules/ruoyi-hikvision/ruoyi-hikvision-core/src/main/resources/sdk/version/README.md
+
+# ZLMediaKit C API 原生库
+backend/lib/zlm/
+
+# 后端构建产物
+backend/**/target/
+backend/**/*.log
+backend/logs/
+
+# 前端
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.log
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# 本地环境配置
+*.local

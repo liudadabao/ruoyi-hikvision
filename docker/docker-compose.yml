@@ -1,0 +1,70 @@
+# RuoYi-Hikvision 一体化部署
+# 包含: MySQL / Redis / 后端(含海康SDK模块) / 前端
+#
+# 部署前准备:
+# 1. 将海康 SDK 原生库放入 ./lib/hikvision/{platform}/ (如 lib/hikvision/linux64/)
+# 2. 将 ZLMediaKit C API 库 (libmk_api.so) 放入 ./lib/zlm/
+# 3. 数据库初始化: 挂载 script/sql 目录, 首次启动后执行 ry_vue.sql + ry_hikvision.sql
+#
+# 启动: docker compose up -d
+
+services:
+  mysql:
+    image: mysql:8.4.9
+    container_name: hik-mysql
+    environment:
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ry-vue
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/data/:/var/lib/mysql/
+      - ../backend/script/sql/:/docker-entrypoint-initdb.d/:ro
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+    privileged: true
+    network_mode: "host"
+
+  redis:
+    image: redis:8.6.3
+    container_name: hik-redis
+    ports:
+      - "6379:6379"
+    privileged: true
+    network_mode: "host"
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: ruoyi-admin/Dockerfile
+    image: hikvision/backend:6.0.0
+    container_name: hik-backend
+    environment:
+      TZ: Asia/Shanghai
+      SERVER_PORT: 8080
+    volumes:
+      # 海康 SDK 原生库 (win64/linux64/armlinux64...)
+      - ./lib/hikvision/:/ruoyi/lib/hikvision/
+      # ZLMediaKit C API 原生库
+      - ./lib/zlm/:/ruoyi/lib/zlm/
+      # 日志
+      - ./backend/logs/:/ruoyi/server/logs/
+    privileged: true
+    network_mode: "host"
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    image: hikvision/frontend:6.0.0
+    container_name: hik-frontend
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "80:80"
+    privileged: true
+    network_mode: "host"
