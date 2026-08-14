@@ -154,8 +154,8 @@
 </template>
 
 <script setup name="LoginInfo" lang="ts">
-import { list, delLoginInfo, cleanLoginInfo, unlockLoginInfo } from '@/api/monitor/logininfo';
-import { LoginInfoQuery, LoginInfoVO } from '@/api/monitor/logininfo/types';
+import { list, delLoginInfo, cleanLoginInfo, unlockLoginInfo } from '@/api/monitor/loginInfo';
+import { LoginInfoQuery, LoginInfoVO } from '@/api/monitor/loginInfo/types';
 import { useLoading } from '@/hooks/async/useLoading';
 import { useDateRangeQuery } from '@/hooks/form/useDateRangeQuery';
 import { useSearchReset } from '@/hooks/form/useSearchReset';
