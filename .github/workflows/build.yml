@@ -1,0 +1,57 @@
+name: build
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  backend:
+    name: Backend Build & Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Build (ruoyi-admin + deps)
+        run: ./mvnw -B -pl ruoyi-admin -am package -DskipTests
+
+      - name: Run hikvision unit tests
+        run: ./mvnw -B -pl ruoyi-modules/ruoyi-hikvision/ruoyi-hikvision-core,ruoyi-modules/ruoyi-hikvision/ruoyi-hikvision-media -am test -Dmaven.test.skip=false
+
+  frontend:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+    # plus-ui 构建为可选校验，失败不阻断整体 CI
+    continue-on-error: true
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build:prod
