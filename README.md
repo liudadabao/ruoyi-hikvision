@@ -2,9 +2,11 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/liudadabao/ruoyi-hikvision)](https://github.com/liudadabao/ruoyi-hikvision/stargazers)
 [![build](https://github.com/liudadabao/ruoyi-hikvision/actions/workflows/build.yml/badge.svg)](https://github.com/liudadabao/ruoyi-hikvision/actions/workflows/build.yml)
+[![Gitee](https://gitee.com/liudadabao/ruoyi-hikvision/badge/star.svg)](https://gitee.com/liudadabao/ruoyi-hikvision)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
 > GitHub 仓库：<https://github.com/liudadabao/ruoyi-hikvision>
+> Gitee 镜像：<https://gitee.com/liudadabao/ruoyi-hikvision>
 
 基于 [RuoYi-Vue-Plus](https://gitee.com/dromara/RuoYi-Vue-Plus)（Spring Boot 3 / JDK 21）与
 [plus-ui](https://gitee.com/dromara/plus-ui)（Vue 3）构建的海康威视**设备网络 SDK** 统一对接模块，
